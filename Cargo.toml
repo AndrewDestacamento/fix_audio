@@ -1,0 +1,63 @@
+[package]
+name = "fix_audio"
+version = "0.16.1"
+edition = "2024"
+
+[dependencies]
+ebur128 = "0.1.10"
+hound = "3.5.*"
+lofty = { git = "https://github.com/Serial-ATA/lofty-rs.git" }
+mimalloc = "0.1.*"
+rayon = "1.12.*"
+realfft = "3.5.*"
+symphonia = { git = "https://github.com/pdeljanov/Symphonia.git", branch = "dev-0.6", features = ["opt-simd", "all"] }
+
+[features]
+default = ["final_rotation", "subsonic_removal"]
+final_rotation = []
+subsonic_removal = []
+
+[profile.dev]
+incremental = false # reason = "reduce size on disk for debug/Clippy builds"
+codegen-units = 1
+
+[profile.dev.build-override]
+inherits = "dev"
+
+[profile.release]
+opt-level = 3
+debug = false
+lto = true
+panic = "abort"
+incremental = false
+codegen-units = 1
+
+[profile.release.build-override]
+inherits = "release"
+
+[lints.clippy]
+complexity =    {level = "warn", priority = -1}
+correctness =   {level = "warn", priority = -1}
+nursery =   {level = "warn", priority = -1}
+
+pedantic =  {level = "warn", priority = -1}
+cast_precision_loss =       "allow" # reason = "allow usize as f64, little precision loss"
+cast_possible_truncation =  "allow" # reason = "allow using f64 for precision, then truncating to f32 or usize"
+
+perf =  {level = "warn", priority = -1}
+style = {level = "warn", priority = -1}
+
+suspicious =    {level = "warn", priority = -1}
+blanket_clippy_restriction_lints =  "allow" # reason = "whitelist seens better than blacklist" 
+
+restriction =   {level = "warn", priority = -1}
+as_conversions =                "allow" # reason = "some conversions are required, see allowed pedantic lints"
+cast_sign_loss =                "allow" # reason = "allow f64 as usize or u32"
+float_arithmetic =              "allow" # reason = "float arithmetic is required"
+implicit_return =               "allow" # reason = "make things rusty"
+print_stdout =                  "allow" # reason = "printing to console is required"
+question_mark_used =            "allow" # reason = "no need to add additional error info"
+semicolon_outside_block =       "allow" # reason = "personal preference"
+separated_literal_suffix =      "allow" # reason = "personal preference"
+single_call_fn =                "allow" # reason = "allow breaking long functions into smaller functions"
+use_debug =                     "allow" # reason = "pretty print is good enough"

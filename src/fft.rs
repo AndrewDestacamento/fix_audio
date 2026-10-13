@@ -129,7 +129,7 @@ fn align(original_left: &mut Complex<f32>, original_right: &mut Complex<f32>) {
 
         // Upon further analysis, it can be seen that the above is equivalent to converting to mid/side / sum/diff channels,
         //     swapping the magnitudes of the mid and side channels, then converting back to left/right.
-        // This seems to produce more calculations, likely due to having to calucalte the power of mid and side separately.
+        // This seems to produce more calculations, likely due to having to calculate the power of mid and side separately.
 
         let line = comp_mult(
             *original_left + *original_right,

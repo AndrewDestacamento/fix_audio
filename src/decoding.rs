@@ -112,7 +112,7 @@ pub fn get_samples(path: &path::PathBuf, sample_count: usize) -> SamplesResult {
     // 10
     // 11
     while let Ok(Some(packet)) = format.next_packet() {
-        if packet.track_id() == track_id {
+        if packet.track_id == track_id {
             match decoder.decode(&packet) {
                 Ok(audio_buf) => {
                     // Unsure how to get rid of this statement since it'll be run once, but it might be optimized out

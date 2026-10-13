@@ -1,16 +1,16 @@
 [package]
 name = "fix_audio"
-version = "0.16.1"
+version = "0.16.2"
 edition = "2024"
 
 [dependencies]
 ebur128 = "0.1.10"
-hound = "3.5.*"
-lofty = { git = "https://github.com/Serial-ATA/lofty-rs.git" }
-mimalloc = "0.1.*"
-rayon = "1.12.*"
-realfft = "3.5.*"
-symphonia = { git = "https://github.com/pdeljanov/Symphonia.git", branch = "dev-0.6", features = ["opt-simd", "all"] }
+hound = "3.5.1"
+lofty = "0.25.4"
+mimalloc = "0.1.52"
+rayon = "1.12.0"
+realfft = "3.5.0"
+symphonia = { version = "0.6.1", features = ["default", "all"] }
 
 [features]
 default = ["final_rotation", "subsonic_removal"]
